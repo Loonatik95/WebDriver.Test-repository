@@ -6,8 +6,8 @@ import org.openqa.selenium.chrome.ChromeDriver;
 
 public class FirstProgram {
 
-  WebDriver driver;
-
+  private WebDriver driver;
+  
   @Before
   public void setUp() {
     driver = new ChromeDriver();
@@ -21,5 +21,6 @@ public class FirstProgram {
   @After
   public void tearDown() {
     driver.quit();
+    driver = null;
   }
 }
