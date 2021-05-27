@@ -1,23 +1,25 @@
 package firstSteps;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 import java.util.concurrent.TimeUnit;
 
-public class Task3 {
+public class Task3Test {
   private WebDriver driver;
 
-  @Before
+
+  @BeforeEach
   public void start() {
     driver = new ChromeDriver();
     driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
     driver.navigate().to("http://localhost/litecart/admin/");
     driver.manage().window().maximize();
+
   }
 
   @Test
@@ -30,8 +32,9 @@ public class Task3 {
     driver.findElement(By.xpath("//a[@title='Logout']")).click();
   }
 
-  @After
-  public void stop(){
+
+  @AfterEach
+  public void stop() {
     driver.quit();
     driver = null;
   }

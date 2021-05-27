@@ -1,17 +1,17 @@
 package firstSteps;
 
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
-public class FirstProgram {
+public class FirstProgramTest {
 
   private WebDriver driver;
 
-  @Before
+  @BeforeEach
   public void setUp() {
     driver = new ChromeDriver();
   }
@@ -19,10 +19,10 @@ public class FirstProgram {
   @Test
   public void firstProgram() {
     driver.get("https://www.facebook.com/");
-    Assert.assertEquals("Facebook — Выполните вход или зарегистрируйтесь", driver.getTitle());
+    Assertions.assertEquals("Facebook — Выполните вход или зарегистрируйтесь", driver.getTitle());
   }
 
-  @After
+  @AfterEach
   public void tearDown() {
     driver.quit();
     driver = null;
