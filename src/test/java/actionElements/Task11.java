@@ -5,9 +5,10 @@ import org.openqa.selenium.By;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class Task11 extends TestBaseTask11 {
-
-    private User user = new User("Sasha", "Karapuz",
-            "karapuzikst@tut.by", "171820");
+    
+    private static String email = System.currentTimeMillis() + "@tut.by";
+    private static User user = new User("Sasha", "Karapuz",
+            email, "171820");
 
     @Order(1)
     @Test

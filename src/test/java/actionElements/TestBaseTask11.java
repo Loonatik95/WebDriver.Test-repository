@@ -1,6 +1,8 @@
 package actionElements;
 
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -10,19 +12,19 @@ import java.util.concurrent.TimeUnit;
 
 public class TestBaseTask11 {
 
-    protected WebDriver driver;
+    public static WebDriver driver;
 
 
-    @BeforeEach
-    public void start() {
+    @BeforeAll
+    public static void start() {
         driver = new ChromeDriver();
         driver.get("http://localhost/litecart/en/");
-        driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         driver.manage().window().maximize();
     }
 
-    @AfterEach
-    public void stop() {
+    @AfterAll
+    public static void stop() {
         driver.quit();
     }
 
