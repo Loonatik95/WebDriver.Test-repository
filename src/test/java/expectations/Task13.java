@@ -1,11 +1,10 @@
 package expectations;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class Task13 extends TestBase {
 
@@ -16,6 +15,10 @@ public class Task13 extends TestBase {
             WebElement item = driver.findElement(By.xpath("//span[@class='quantity']"));
             String quantityOfItemBeforeAdding = item.getText();
             addProduct();
+            try {
+                driver.findElement(By.linkText("View full page")).click();
+            } catch (Exception e) {
+            }
             wait.until(ExpectedConditions.not(ExpectedConditions.textToBe(By.xpath("//span[@class='quantity']")
                     , quantityOfItemBeforeAdding)));
             driver.findElement(By.xpath("//a/i[@title='Home']")).click();
@@ -23,14 +26,13 @@ public class Task13 extends TestBase {
 
         driver.findElement(By.xpath("//a[text()='Checkout »']")).click();
 
-        int item = driver.findElements(By.xpath("//tr/td[@class='item']")).size();
-        while (item > 0) {
-            driver.findElement(By.xpath("//button[text()='Remove']")).click();
-            wait.until(ExpectedConditions.numberOfElementsToBeLessThan(By.xpath("//tr/td[@class='item']"), item--));
+        WebElement buttonDeleteItem;
+        while (driver.findElements(By.cssSelector("[name='remove_cart_item']")).size() != 0) {
+            buttonDeleteItem = driver.findElement(By.cssSelector("[name='remove_cart_item']"));
+            buttonDeleteItem.click();
+            wait.until(ExpectedConditions.stalenessOf(buttonDeleteItem));
         }
 
-        assertTrue(driver.findElement(By.xpath("//p/em")).isDisplayed());
+        Assertions.assertTrue(driver.findElement(By.tagName("p")).getText().contains("There are no items in your cart."));
     }
-
-
 }

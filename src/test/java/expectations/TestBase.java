@@ -20,9 +20,8 @@ public class TestBase {
     @BeforeEach
     public void start() {
         driver = new ChromeDriver();
-        wait = new WebDriverWait(driver, 5);
+        wait = new WebDriverWait(driver, 10);
         driver.get("http://localhost/litecart/en/");
-        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         driver.manage().window().maximize();
     }
 
@@ -30,8 +29,6 @@ public class TestBase {
     public void stop() {
         driver.quit();
     }
-
-
 
     protected void addProduct() {
         try {
@@ -44,4 +41,5 @@ public class TestBase {
             driver.findElement(By.xpath("//button[text()='Add To Cart']")).click();
         }
     }
+
 }
